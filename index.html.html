@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hemin Kale — Salesforce Technical Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink: #0F0E0B;
+  --ink2: #3A3830;
+  --ink3: #7A7668;
+  --paper: #FAF8F4;
+  --paper2: #F2EFE9;
+  --paper3: #E8E4DC;
+  --sf: #0176D3;
+  --sf-light: #EBF5FF;
+  --green: #1A6B3A;
+  --green-bg: #EBF7EF;
+  --red: #B91C1C;
+  --accent: #D97706;
+  --accent-bg: #FEF3C7;
+  --border: #E0DDD6;
+  --shadow: 0 2px 12px rgba(15,14,11,0.08);
+  --shadow-lg: 0 8px 40px rgba(15,14,11,0.12);
+  --r: 10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+#topbar {
+  background: var(--ink);
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+}
+#topbar a { color: #F8D06B; text-decoration: none; font-weight: 700; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,248,244,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 60px;
+  height: 60px;
+}
+.nav-logo {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+.nav-logo sup {
+  font-size: 9px;
+  background: var(--sf);
+  color: white;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  vertical-align: super;
+}
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
+  text-transform: uppercase; color: var(--ink3);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-hire {
+  background: var(--sf);
+  color: white !important;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: opacity 0.2s !important;
+}
+.nav-hire:hover { opacity: 0.88; }
+
+/* ── HERO ── */
+#hero {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  min-height: calc(100vh - 95px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--green-bg);
+  border: 1px solid #BBE8CC;
+  color: var(--green);
+  font-size: 12px; font-weight: 800;
+  letter-spacing: 1px; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.5s ease both;
+}
+.hero-eyebrow::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--green);
+  animation: pulse 1.8s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+h1.hero-name {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -3px;
+  margin-bottom: 12px;
+  animation: fadeUp 0.55s 0.08s ease both;
+}
+h1.hero-name em {
+  font-style: italic;
+  color: var(--sf);
+}
+
+.hero-tagline {
+  font-size: 17px;
+  color: var(--ink2);
+  max-width: 500px;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  animation: fadeUp 0.55s 0.16s ease both;
+}
+.hero-tagline strong { color: var(--ink); }
+
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 40px;
+  animation: fadeUp 0.55s 0.24s ease both;
+}
+.chip {
+  background: var(--paper2);
+  border: 1px solid var(--border);
+  color: var(--ink2);
+  font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 6px;
+  letter-spacing: 0.2px;
+}
+.chip.sf { background: var(--sf-light); border-color: #9BC9EE; color: var(--sf); }
+.chip.ai { background: #F3EFFE; border-color: #C9B3F9; color: #6B21A8; }
+
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.55s 0.32s ease both;
+}
+.btn-main {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 13px 28px; border-radius: 8px;
+  font-weight: 800; font-size: 14px;
+  text-decoration: none; letter-spacing: 0.2px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
+}
+.btn-main:hover { background: var(--ink2); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.btn-sec {
+  background: white;
+  color: var(--ink);
+  padding: 13px 28px; border-radius: 8px;
+  font-weight: 700; font-size: 14px;
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s;
+}
+.btn-sec:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* ── HERO RIGHT CARD ── */
+.hero-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.hc-header {
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.hc-avatar {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, #0176D3, #032D60);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 22px; font-weight: 900; color: white;
+  flex-shrink: 0;
+}
+.hc-name { font-weight: 800; font-size: 16px; line-height: 1.3; }
+.hc-title { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+
+.hc-stat-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px; margin-bottom: 20px;
+}
+.hc-stat {
+  text-align: center;
+  background: var(--paper2);
+  border-radius: 8px;
+  padding: 14px 8px;
+}
+.hc-stat-n {
+  font-family: 'Fraunces', serif;
+  font-size: 28px; font-weight: 900;
+  line-height: 1; color: var(--ink);
+}
+.hc-stat-l { font-size: 10px; color: var(--ink3); font-weight: 700; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.hc-certs {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-bottom: 20px;
+}
+.hc-cert {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 600; color: var(--ink2);
+  background: var(--sf-light);
+  border-radius: 6px; padding: 7px 10px;
+}
+.hc-cert-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--sf); flex-shrink: 0;
+}
+.hc-cert-year { margin-left: auto; color: var(--ink3); font-weight: 500; font-size: 11px; }
+
+.hc-contact {
+  background: var(--paper2);
+  border-radius: 8px; padding: 14px 16px;
+  font-size: 13px;
+}
+.hc-contact-row {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--ink2); margin-bottom: 6px;
+}
+.hc-contact-row:last-child { margin-bottom: 0; }
+.hc-contact-row a { color: var(--sf); text-decoration: none; font-weight: 600; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+
+/* ── SECTIONS ── */
+.section-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 60px; }
+.section-wrap + .section-wrap { padding-top: 0; }
+
+.section-hl {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 36px;
+}
+.section-hl-tag {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--sf);
+  background: var(--sf-light); padding: 4px 10px;
+  border-radius: 4px;
+}
+.section-hl-line { flex: 1; height: 1px; background: var(--border); }
+.section-h {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+.section-sub { color: var(--ink3); font-size: 16px; max-width: 540px; margin-bottom: 48px; }
+
+/* divider band */
+.band { background: var(--paper2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* ── WHY HIRE ME ── */
+#why { background: var(--ink); color: white; }
+#why .section-wrap { padding: 64px 60px; }
+#why .section-hl-tag { background: rgba(255,255,255,0.12); color: #F8D06B; }
+#why .section-hl-line { background: rgba(255,255,255,0.12); }
+#why .section-h { color: white; }
+#why .section-sub { color: rgba(255,255,255,0.55); }
+
+.why-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 16px;
+}
+.why-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r);
+  padding: 28px 24px;
+  transition: background 0.3s, transform 0.3s;
+  cursor: default;
+}
+.why-card:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-4px);
+}
+.why-icon { font-size: 26px; margin-bottom: 14px; }
+.why-title { font-weight: 800; font-size: 16px; margin-bottom: 8px; }
+.why-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.75; }
+
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 24px; }
+.exp-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.exp-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.exp-card.sf::before { background: var(--sf); }
+.exp-card.dell::before { background: #007DB8; }
+.exp-card.tcs::before { background: #6B21A8; }
+.exp-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+.exp-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+}
+.exp-role { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 700; letter-spacing: -0.5px; }
+.exp-company { font-size: 13px; color: var(--ink3); font-weight: 700; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+.exp-badge {
+  background: var(--paper2); border: 1px solid var(--border);
+  font-size: 12px; font-weight: 700; color: var(--ink3);
+  padding: 5px 12px; border-radius: 100px; white-space: nowrap;
+}
+.exp-badge.current { background: var(--green-bg); border-color: #BBE8CC; color: var(--green); }
+
+.exp-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.exp-pill {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 3px 10px; border-radius: 4px;
+  background: var(--paper2); border: 1px solid var(--border);
+  color: var(--ink2);
+}
+
+.exp-points { display: flex; flex-direction: column; gap: 7px; }
+.exp-point {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13.5px; color: var(--ink2); line-height: 1.65;
+}
+.exp-point::before {
+  content: '→';
+  color: var(--sf); font-weight: 700; flex-shrink: 0;
+  margin-top: 1px; font-size: 12px;
+}
+
+/* ── SKILLS ── */
+.skills-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+}
+.skills-group-title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--paper3);
+}
+.skill-row { display: flex; flex-direction: column; gap: 14px; }
+.skill-item { display: flex; flex-direction: column; gap: 6px; }
+.skill-label-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; font-weight: 700; color: var(--ink2);
+}
+.skill-level {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 2px 8px; border-radius: 4px;
+}
+.skill-level.expert { background: var(--green-bg); color: var(--green); }
+.skill-level.advanced { background: var(--sf-light); color: var(--sf); }
+.skill-level.proficient { background: var(--accent-bg); color: var(--accent); }
+.skill-track {
+  height: 5px; background: var(--paper3);
+  border-radius: 3px; overflow: hidden;
+}
+.skill-bar {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, var(--sf), #01A2F1);
+  transform-origin: left; transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.4,0,0.2,1);
+}
+.skill-bar.green { background: linear-gradient(90deg, var(--green), #22C55E); }
+.skill-bar.amber { background: linear-gradient(90deg, var(--accent), #FBBF24); }
+.skill-bar.visible { transform: scaleX(1); }
+
+/* ── CERTS ── */
+#certifications { background: var(--paper2); }
+.certs-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;
+}
+.cert-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  display: flex; gap: 14px; align-items: center;
+  box-shadow: var(--shadow);
+  transition: all 0.25s;
+}
+.cert-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: #9BC9EE; }
+.cert-logo {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: linear-gradient(135deg, #0176D3 0%, #032D60 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; flex-shrink: 0;
+}
+.cert-name { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+.cert-meta { display: flex; gap: 8px; align-items: center; margin-top: 4px; }
+.cert-issuer { font-size: 11px; color: var(--sf); font-weight: 700; }
+.cert-year { font-size: 11px; color: var(--ink3); }
+.cert-new {
+  margin-left: auto;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--green);
+  background: var(--green-bg); padding: 2px 7px; border-radius: 4px;
+  align-self: flex-start; flex-shrink: 0;
+}
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.edu-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: var(--r); padding: 28px 28px;
+  box-shadow: var(--shadow);
+  transition: all 0.25s;
+}
+.edu-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.edu-card.featured { border-color: var(--sf); background: var(--sf-light); }
+.edu-inst {
+  font-family: 'Fraunces', serif;
+  font-size: 20px; font-weight: 700;
+  letter-spacing: -0.5px; margin-bottom: 4px;
+}
+.edu-degree { font-size: 14px; font-weight: 600; color: var(--ink2); margin-bottom: 12px; }
+.edu-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.edu-tag {
+  font-size: 12px; font-weight: 700;
+  padding: 4px 10px; border-radius: 5px;
+  background: var(--paper2); border: 1px solid var(--border);
+  color: var(--ink2);
+}
+.edu-tag.gpa { background: var(--green-bg); border-color: #BBE8CC; color: var(--green); }
+
+/* ── CONTACT ── */
+#contact { background: var(--ink); color: white; }
+#contact .section-wrap { padding: 80px 60px; }
+#contact .section-hl-tag { background: rgba(255,255,255,0.1); color: #F8D06B; }
+#contact .section-hl-line { background: rgba(255,255,255,0.12); }
+#contact .section-h { color: white; }
+#contact .section-sub { color: rgba(255,255,255,0.5); }
+
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+.contact-info-items { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+.ci-row {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 15px;
+}
+.ci-icon {
+  width: 40px; height: 40px; border-radius: 9px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.ci-row a { color: #93C5FD; text-decoration: none; font-weight: 600; }
+.ci-row span { color: rgba(255,255,255,0.7); }
+
+.availability-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--r); padding: 20px 22px;
+}
+.avail-title { font-weight: 800; font-size: 14px; margin-bottom: 10px; color: #F8D06B; }
+.avail-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+}
+.avail-item::before { content: '✓'; color: #4ADE80; font-weight: 800; }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cf-group { display: flex; flex-direction: column; gap: 5px; }
+.cf-group label { font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.cf-group input,
+.cf-group select,
+.cf-group textarea {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 7px; padding: 11px 14px;
+  color: white; font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: 14px; outline: none;
+  transition: border-color 0.2s;
+}
+.cf-group select option { background: #1a1a2e; }
+.cf-group input:focus,
+.cf-group select:focus,
+.cf-group textarea:focus { border-color: #93C5FD; }
+.cf-group input::placeholder,
+.cf-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+.cf-submit {
+  background: white; color: var(--ink);
+  border: none; padding: 13px 28px;
+  border-radius: 8px; font-family: 'Cabinet Grotesk', sans-serif;
+  font-weight: 800; font-size: 14px; cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.cf-submit:hover { opacity: 0.9; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+/* ── FOOTER ── */
+footer {
+  background: #080808; color: rgba(255,255,255,0.3);
+  padding: 24px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px;
+}
+footer strong { color: rgba(255,255,255,0.6); }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  #hero { grid-template-columns: 1fr; padding: 60px 24px; min-height: auto; }
+  .hero-card { display: none; }
+  .section-wrap { padding: 60px 24px; }
+  .why-grid, .skills-layout, .edu-grid, .contact-layout { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 8px; padding: 20px 24px; text-align: center; }
+  .cf-row { grid-template-columns: 1fr; }
+  #why .section-wrap, #contact .section-wrap { padding: 60px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  Open to new opportunities · <a href="#contact">Reach out →</a>
+</div>
+
+<nav>
+  <div class="nav-logo">Hemin Kale <sup>7× SF</sup></div>
+  <ul class="nav-links">
+    <li><a href="#why">Why Me</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-hire">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div style="max-width:1200px; margin:0 auto; padding:80px 60px; display:grid; grid-template-columns:1fr 370px; gap:60px; align-items:center;" id="hero-wrap">
+
+  <div>
+    <div class="hero-eyebrow">Open to Opportunities</div>
+    <h1 class="hero-name">Hemin<br/><em>Kale.</em></h1>
+    <p class="hero-tagline">
+      <strong>Salesforce Technical Consultant</strong> with 7+ years building enterprise-grade CRM solutions across Sales Cloud, Service Cloud, OmniStudio, CRM Analytics, and Agentforce AI.
+    </p>
+    <div class="hero-chips">
+      <span class="chip sf">⚡ Apex &amp; LWC</span>
+      <span class="chip sf">☁️ OmniStudio</span>
+      <span class="chip sf">📊 CRM Analytics</span>
+      <span class="chip ai">🤖 Agentforce AI</span>
+      <span class="chip">🔗 REST API</span>
+      <span class="chip">🎓 IIM Ahmedabad</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-main">💼 Hire Me Now</a>
+      <a href="#experience" class="btn-sec">View Experience →</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hc-header">
+      <div class="hc-avatar">HK</div>
+      <div>
+        <div class="hc-name">Hemin Kale</div>
+        <div class="hc-title">Salesforce Technical Consultant</div>
+      </div>
+    </div>
+
+    <div class="hc-stat-row">
+      <div class="hc-stat">
+        <div class="hc-stat-n">7+</div>
+        <div class="hc-stat-l">Years</div>
+      </div>
+      <div class="hc-stat">
+        <div class="hc-stat-n">7×</div>
+        <div class="hc-stat-l">Certified</div>
+      </div>
+      <div class="hc-stat">
+        <div class="hc-stat-n">3</div>
+        <div class="hc-stat-l">Top Firms</div>
+      </div>
+    </div>
+
+    <div class="hc-certs">
+      <div class="hc-cert"><div class="hc-cert-dot"></div>Platform Developer I<span class="hc-cert-year">2020</span></div>
+      <div class="hc-cert"><div class="hc-cert-dot"></div>Service Cloud Consultant<span class="hc-cert-year">2020</span></div>
+      <div class="hc-cert"><div class="hc-cert-dot"></div>Einstein Analytics Consultant<span class="hc-cert-year">2020</span></div>
+      <div class="hc-cert" style="background:#EBF7EF;"><div class="hc-cert-dot" style="background:#1A6B3A;"></div>AI Specialist ✦ New<span class="hc-cert-year">2025</span></div>
+    </div>
+
+    <div class="hc-contact">
+      <div class="hc-contact-row">📧 <a href="mailto:hemin95@gmail.com">hemin95@gmail.com</a></div>
+      <div class="hc-contact-row">📞 <a href="tel:+918446260706">+91 844 626 0706</a></div>
+      <div class="hc-contact-row">📍 <span>India · Remote Friendly</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── WHY HIRE ME ── -->
+<div id="why">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Why Hire Me</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">What Sets Me Apart</h2>
+    <p class="section-sub reveal">Beyond certifications — here's what I actually bring to your team.</p>
+
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">🏦</div>
+        <div class="why-title">Domain Expertise</div>
+        <div class="why-desc">Deep hands-on experience with banking and insurance Salesforce implementations — I understand compliance requirements, complex financial workflows, and enterprise security.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Full-Stack Salesforce</div>
+        <div class="why-desc">From front-end LWC development to Apex triggers, REST API integrations, and SAQL-powered dashboards — I own the entire Salesforce stack, not just one layer.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤖</div>
+        <div class="why-title">AI-Ready (Agentforce)</div>
+        <div class="why-desc">Certified AI Specialist with hands-on Agentforce experience — building prompt templates, agent actions, and Flow-based AI automation that actually drives business value.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <div class="why-title">Analytics + Business Acumen</div>
+        <div class="why-desc">PG Diploma in Business Analytics from IIM Ahmedabad. I bridge technical delivery with business insight — I build dashboards that answer the right questions.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🏢</div>
+        <div class="why-title">Top-Tier Track Record</div>
+        <div class="why-desc">Salesforce → Dell Technologies → TCS. Promoted progressively, delivered across 5+ sub-projects at TCS alone. I bring the rigour of enterprise consulting to every engagement.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔒</div>
+        <div class="why-title">Security-First Mindset</div>
+        <div class="why-desc">Experienced in sharing rules, permission sets, and field-level security aligned to enterprise banking compliance requirements — I build systems you can trust at scale.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EXPERIENCE ── -->
+<div id="experience">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Experience</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">Career Timeline</h2>
+    <p class="section-sub reveal">7+ years of progressive growth across three world-class organizations.</p>
+
+    <div class="exp-list">
+
+      <div class="exp-card sf reveal">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Technical Consultant</div>
+            <div class="exp-company">Salesforce — The #1 CRM Platform</div>
+          </div>
+          <div class="exp-badge current">🟢 Aug 2024 – Present</div>
+        </div>
+        <div class="exp-pills">
+          <span class="exp-pill">OmniStudio</span><span class="exp-pill">LWC</span>
+          <span class="exp-pill">Apex</span><span class="exp-pill">Agentforce</span>
+          <span class="exp-pill">Sales Cloud</span><span class="exp-pill">Platform Events</span>
+        </div>
+        <div class="exp-points">
+          <div class="exp-point">Developed and customized OmniStudio solutions for banking and insurance clients, streamlining customer interactions and automating complex financial workflows.</div>
+          <div class="exp-point">Implemented Sales Cloud opportunity lifecycle automation, lead conversion enhancements, and process optimization using Apex, Flows, and OmniStudio orchestration.</div>
+          <div class="exp-point">Engineered high-performance, modular Lightning Web Components, optimizing data handling and caching to reduce server calls and improve UI responsiveness.</div>
+          <div class="exp-point">Designed scalable LWC architecture with component composition, custom events, and pub-sub patterns, ensuring maintainability, reusability, and seamless inter-component communication.</div>
+          <div class="exp-point">Configured Agentforce capabilities: prompt templates, agent actions, and Flow-based AI automation for intelligent task execution and guided user interactions.</div>
+          <div class="exp-point">Implemented real-time event-driven integrations using Platform Events and LWC empApi for Salesforce-to-external-platform communication.</div>
+          <div class="exp-point">Designed Apex triggers using scalable handler frameworks to support enterprise transaction volumes.</div>
+
+        </div>
+      </div>
+
+      <div class="exp-card dell reveal">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Software Engineer II</div>
+            <div class="exp-company">Dell Technologies — Fortune 500 Tech Leader</div>
+          </div>
+          <div class="exp-badge">Mar 2022 – Aug 2024</div>
+        </div>
+        <div class="exp-pills">
+          <span class="exp-pill">LWC</span><span class="exp-pill">Apex Triggers</span>
+          <span class="exp-pill">REST API</span><span class="exp-pill">CRM Analytics</span>
+          <span class="exp-pill">Async Apex</span><span class="exp-pill">SAQL</span>
+        </div>
+        <div class="exp-points">
+          <div class="exp-point">Built custom Sales Cloud applications using LWC, Flows, data modelling, and async Apex — enabling sales teams to track opportunities and serve customers faster.</div>
+          <div class="exp-point">Developed end-to-end REST API integrations with named credentials and connected apps, enabling real-time bidirectional data flow between Salesforce and external systems.</div>
+          <div class="exp-point">Created CRM Analytics dashboards using SAQL and discovery features for descriptive and diagnostic analysis of sales data, integrating from multiple data sources via connectors.</div>
+        </div>
+      </div>
+
+      <div class="exp-card tcs reveal">
+        <div class="exp-top">
+          <div>
+            <div class="exp-role">Salesforce Developer</div>
+            <div class="exp-company">Tata Consultancy Services — Global IT Leader</div>
+          </div>
+          <div class="exp-badge">Jan 2019 – Mar 2022</div>
+        </div>
+        <div class="exp-pills">
+          <span class="exp-pill">Einstein Analytics</span><span class="exp-pill">Dataflow</span>
+          <span class="exp-pill">Batch Apex</span><span class="exp-pill">Case Management</span>
+          <span class="exp-pill">Security &amp; Sharing</span><span class="exp-pill">Agile</span>
+        </div>
+        <div class="exp-points">
+          <div class="exp-point">Delivered Einstein Analytics platform projects — converting multi-source raw data into KPI dashboards using SAQL, interactions, and bindings across 5+ successful sub-projects.</div>
+          <div class="exp-point">Developed case management functionality for a leading enterprise client, improving agent productivity in tracking and resolving customer issues faster.</div>
+          <div class="exp-point">Implemented async Apex (Batch, Queueable, Future) for large-scale data processing, background integrations, and transaction optimization across banking workflows.</div>
+          <div class="exp-point">Strengthened platform security using sharing rules, permission sets, and field-level security aligned to enterprise banking compliance requirements.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ── SKILLS ── -->
+<div id="skills" class="band">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Skills</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">Technical Proficiency</h2>
+
+    <div class="skills-layout">
+      <div class="reveal">
+        <div class="skills-group-title">Salesforce Platform</div>
+        <div class="skill-row">
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Apex / LWC Development</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Sales Cloud / Service Cloud</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.93"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>CRM Analytics / Tableau</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.90"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>OmniStudio</span><span class="skill-level advanced">Advanced</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.87"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Agentforce / AI Tools</span><span class="skill-level advanced">Advanced</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.82"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Flows &amp; Process Automation</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar" data-w="0.92"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="skills-group-title">Data, Analytics &amp; Integration</div>
+        <div class="skill-row">
+          <div class="skill-item">
+            <div class="skill-label-row"><span>REST API Integration</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar green" data-w="0.92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>SAQL &amp; Data Visualization</span><span class="skill-level expert">Expert</span></div>
+            <div class="skill-track"><div class="skill-bar green" data-w="0.88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Python</span><span class="skill-level proficient">Proficient</span></div>
+            <div class="skill-track"><div class="skill-bar amber" data-w="0.75"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>ML: Regression, Decision Trees</span><span class="skill-level proficient">Proficient</span></div>
+            <div class="skill-track"><div class="skill-bar amber" data-w="0.72"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>A/B Testing &amp; Time Series</span><span class="skill-level proficient">Proficient</span></div>
+            <div class="skill-track"><div class="skill-bar amber" data-w="0.70"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row"><span>Platform Security &amp; Compliance</span><span class="skill-level advanced">Advanced</span></div>
+            <div class="skill-track"><div class="skill-bar green" data-w="0.85"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CERTIFICATIONS ── -->
+<div id="certifications">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Certifications</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">7× Salesforce Certified</h2>
+    <p class="section-sub reveal">Industry-verified expertise across the Salesforce ecosystem — from administration to AI.</p>
+
+    <div class="certs-grid reveal">
+      <div class="cert-card">
+        <div class="cert-logo">🛡️</div>
+        <div>
+          <div class="cert-name">Salesforce Certified Administrator</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Dec 2019</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">📊</div>
+        <div>
+          <div class="cert-name">Einstein Analytics &amp; Discovery Consultant</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce · Tableau</span><span class="cert-year">· Jun 2020</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🏗️</div>
+        <div>
+          <div class="cert-name">Platform App Builder</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Jul 2020</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">💻</div>
+        <div>
+          <div class="cert-name">Platform Developer I</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Aug 2020</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🎯</div>
+        <div>
+          <div class="cert-name">Service Cloud Consultant</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Oct 2020</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🌐</div>
+        <div>
+          <div class="cert-name">Community Cloud Consultant</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Jan 2021</span></div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-logo">🤖</div>
+        <div>
+          <div class="cert-name">Salesforce Certified AI Specialist</div>
+          <div class="cert-meta"><span class="cert-issuer">Salesforce</span><span class="cert-year">· Dec 2025</span></div>
+        </div>
+        <span class="cert-new">NEW</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── EDUCATION ── -->
+<div id="education" class="band">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Education</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">Academic Background</h2>
+
+    <div class="edu-grid reveal">
+      <div class="edu-card featured">
+        <div class="edu-inst">IIM Ahmedabad</div>
+        <div class="edu-degree">Post Graduate Diploma in Business Analytics</div>
+        <div class="edu-meta">
+          <span class="edu-tag gpa">GPA 3.44 / 4.3</span>
+          <span class="edu-tag">2023 – 2024</span>
+          <span class="edu-tag">India's #1 B-School</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-inst">Dr. Babasaheb Ambedkar Tech. University</div>
+        <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
+        <div class="edu-meta">
+          <span class="edu-tag gpa">GPA 7.62 / 10</span>
+          <span class="edu-tag">2013 – 2017</span>
+          <span class="edu-tag">Engineering</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<div id="contact">
+  <div class="section-wrap">
+    <div class="section-hl reveal"><span class="section-hl-tag">Contact</span><div class="section-hl-line"></div></div>
+    <h2 class="section-h reveal">Let's Work Together</h2>
+    <p class="section-sub reveal">Open to full-time roles, contract engagements, and consulting projects.</p>
+
+    <div class="contact-layout">
+      <div class="reveal">
+        <div class="contact-info-items">
+          <div class="ci-row"><div class="ci-icon">📧</div><a href="mailto:hemin95@gmail.com">hemin95@gmail.com</a></div>
+          <div class="ci-row"><div class="ci-icon">📞</div><a href="tel:+918446260706">+91 844 626 0706</a></div>
+          <div class="ci-row"><div class="ci-icon">📍</div><span>India · Open to Remote &amp; Relocation</span></div>
+        </div>
+
+        <div class="availability-box">
+          <div class="avail-title">✦ Currently Available For</div>
+          <div class="avail-item">Full-time Salesforce Architect / Senior Consultant roles</div>
+          <div class="avail-item">Contract &amp; Freelance Salesforce projects</div>
+          <div class="avail-item">Agentforce AI implementation engagements</div>
+          <div class="avail-item">CRM Analytics &amp; Tableau consulting</div>
+          <div class="avail-item">Banking &amp; Insurance domain projects</div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="contact-form">
+          <div class="cf-row">
+            <div class="cf-group"><label>Your Name</label><input type="text" placeholder="Jane Smith"/></div>
+            <div class="cf-group"><label>Company</label><input type="text" placeholder="Acme Corp"/></div>
+          </div>
+          <div class="cf-group"><label>Email</label><input type="email" placeholder="jane@company.com"/></div>
+          <div class="cf-group">
+            <label>Type of Engagement</label>
+            <select>
+              <option value="">Select...</option>
+              <option>Full-Time Employment</option>
+              <option>Contract / Freelance</option>
+              <option>Consulting Project</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="cf-group"><label>Message</label><textarea rows="4" placeholder="Tell me about the role or project..."></textarea></div>
+          <button class="cf-submit" onclick="submitForm(this)">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div>© 2025 <strong>Hemin Kale</strong> · Salesforce Technical Consultant</div>
+  <div>Built to impress · 7× Certified · IIM Ahmedabad Alumnus</div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const ro = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('in'), i * 40);
+      // Animate skill bars
+      e.target.querySelectorAll('.skill-bar[data-w]').forEach(bar => {
+        setTimeout(() => {
+          bar.style.width = (parseFloat(bar.dataset.w)*100)+'%';
+          bar.classList.add('visible');
+        }, 200);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => ro.observe(el));
+
+// Immediately reveal hero
+document.querySelectorAll('#hero-wrap .hero-eyebrow, #hero-wrap h1, #hero-wrap .hero-tagline, #hero-wrap .hero-chips, #hero-wrap .hero-ctas, #hero-wrap .hero-card').forEach(el => {
+  el.style.opacity = '1'; el.style.transform = 'none';
+});
+
+// Form submit
+function submitForm(btn) {
+  btn.innerHTML = '✓ Sent! I\'ll be in touch soon';
+  btn.style.background = '#4ADE80';
+  btn.disabled = true;
+}
+
+// Nav highlight on scroll
+const sections = document.querySelectorAll('[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--ink)' : '';
+  });
+});
+</script>
+</body>
+</html>
