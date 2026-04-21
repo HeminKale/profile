@@ -82,6 +82,37 @@ nav {
 .nav-links {
   display: flex; gap: 32px; list-style: none;
 }
+.nav-toggle {
+  display: none;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink);
+}
+.nav-toggle-bars {
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+  border-radius: 2px;
+}
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.nav-toggle-bars::before { top: -5px; }
+.nav-toggle-bars::after { top: 5px; }
 .nav-links a {
   font-size: 13px; font-weight: 700; letter-spacing: 0.3px;
   text-transform: uppercase; color: var(--ink3);
@@ -570,17 +601,34 @@ footer strong { color: rgba(255,255,255,0.6); }
   nav {
     height: auto;
     padding: 10px 16px;
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
+    position: relative;
   }
+  .nav-toggle { display: inline-flex; margin-left: auto; }
   .nav-links {
-    display: flex;
-    gap: 14px;
+    display: none;
+    gap: 0;
     width: 100%;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: 2px;
+    white-space: normal;
+    padding: 6px 0 2px;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+  nav.menu-open .nav-links {
+    display: flex;
+  }
+  .nav-links li {
+    border-bottom: 1px solid var(--paper3);
+  }
+  .nav-links li:last-child {
+    border-bottom: none;
+  }
+  .nav-links a {
+    display: block;
+    padding: 10px 0;
+    font-size: 12px;
   }
   .hero-wrap {
     grid-template-columns: 1fr;
@@ -620,7 +668,10 @@ footer strong { color: rgba(255,255,255,0.6); }
 
 <nav>
   <div class="nav-logo">Hemin Kale <sup>7× SF</sup></div>
-  <ul class="nav-links">
+  <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-links">
+    <span class="nav-toggle-bars"></span>
+  </button>
+  <ul class="nav-links" id="mobile-nav-links">
     <li><a href="#why">Why Me</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -1072,6 +1123,27 @@ window.addEventListener('scroll', () => {
     a.style.color = a.getAttribute('href') === '#'+current ? 'var(--ink)' : '';
   });
 });
+
+// Mobile nav toggle
+const nav = document.querySelector('nav');
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+if (nav && navToggle) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('menu-open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        nav.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+}
 </script>
 </body>
 </html>
