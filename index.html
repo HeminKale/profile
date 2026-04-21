@@ -36,6 +36,7 @@ body {
   font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 /* ── TOPBAR ── */
@@ -97,6 +98,16 @@ nav {
 .nav-hire:hover { opacity: 0.88; }
 
 /* ── HERO ── */
+.hero-wrap {
+  display: grid;
+  grid-template-columns: 1fr 370px;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 60px;
+  align-items: center;
+}
+
 #hero {
   display: grid;
   grid-template-columns: 1fr 380px;
@@ -556,15 +567,48 @@ footer strong { color: rgba(255,255,255,0.6); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  #hero { grid-template-columns: 1fr; padding: 60px 24px; min-height: auto; }
-  .hero-card { display: none; }
+  nav {
+    height: auto;
+    padding: 10px 16px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 2px;
+  }
+  .hero-wrap {
+    grid-template-columns: 1fr;
+    padding: 56px 20px;
+    gap: 28px;
+  }
+  .hero-card {
+    display: block;
+    padding: 22px;
+  }
+  h1.hero-name { font-size: clamp(40px, 14vw, 64px); letter-spacing: -1.5px; }
+  .hero-tagline { font-size: 16px; line-height: 1.6; }
   .section-wrap { padding: 60px 24px; }
   .why-grid, .skills-layout, .edu-grid, .contact-layout { grid-template-columns: 1fr; }
+  .hc-stat-row { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .certs-grid { grid-template-columns: 1fr; }
   footer { flex-direction: column; gap: 8px; padding: 20px 24px; text-align: center; }
   .cf-row { grid-template-columns: 1fr; }
   #why .section-wrap, #contact .section-wrap { padding: 60px 24px; }
+}
+
+@media (max-width: 600px) {
+  #topbar { font-size: 12px; padding: 8px 12px; }
+  .nav-logo { font-size: 17px; }
+  .nav-links a { font-size: 11px; }
+  .section-sub { font-size: 15px; margin-bottom: 34px; }
+  .exp-card, .edu-card { padding: 22px 18px; }
+  .cf-submit { width: 100%; justify-content: center; }
 }
 </style>
 </head>
@@ -587,7 +631,7 @@ footer strong { color: rgba(255,255,255,0.6); }
 </nav>
 
 <!-- ── HERO ── -->
-<div style="max-width:1200px; margin:0 auto; padding:80px 60px; display:grid; grid-template-columns:1fr 370px; gap:60px; align-items:center;" id="hero-wrap">
+<div class="hero-wrap" id="hero-wrap">
 
   <div>
     <div class="hero-eyebrow">Open to Opportunities</div>
